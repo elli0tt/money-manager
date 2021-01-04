@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">money-manager</string>
+    <string name="app_name">Money Manager</string>
+    <string name="app_shared_preferences">App Shared Preferences</string>
+    <string name="title_dynamicfeature">Module Title</string>
+    <string name="title_feature_transaction_template">Feature Transaction Template</string>
+    <string name="title_feature_statistics">Feature Statistics</string>
+    <string name="title_feature_transaction_statistics">Feature Transaction_Statistics</string>
 </resources>

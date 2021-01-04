@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dynamic_nav_graph"
+    app:moduleName="money-manager.dynamic_feature"
+    app:startDestination="@id/dynamicFragment">
+
+    <fragment
+        android:id="@+id/dynamicFragment"
+        android:name="com.elli0tt.dynamicfeature.transaction_list.TransactionListFragment"
+        android:label="DynamicFragment" />
+</navigation>
