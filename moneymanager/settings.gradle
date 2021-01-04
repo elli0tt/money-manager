@@ -1,2 +1,7 @@
+include ':feature_statistics'
+include ':feature_transaction_templates'
+include ':feature_transaction_history'
+include ':library_base'
+include ':app:myapplication'
 include ':app'
 rootProject.name = "money-manager"

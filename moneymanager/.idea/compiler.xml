@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="money-manager.app" target="1.8" />
+      <module name="money-manager.feature_statistics" target="1.8" />
+      <module name="money-manager.feature_transaction_history" target="1.8" />
+      <module name="money-manager.feature_transaction_templates" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
