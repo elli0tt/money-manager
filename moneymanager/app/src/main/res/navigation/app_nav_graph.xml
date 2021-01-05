@@ -2,10 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/dynamicFragment">
+    app:startDestination="@id/transactionListScreen">
 
     <fragment
-        android:id="@+id/dynamicFragment"
-        android:name="com.elli0tt.dynamicfeature.DynamicFragment"
+        android:id="@+id/transactionListScreen"
+        android:name="com.elli0tt.feature_transaction_history.presentation.transaction_list.TransactionListFragment"
         android:label="DynamicFragment" />
 </navigation>

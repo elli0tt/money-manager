@@ -1,4 +1,4 @@
-package com.elli0tt.dynamicfeature
+package com.elli0tt.feature_transaction_history
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -18,9 +18,5 @@ interface AppComponent {
         fun create(@BindsInstance appContext: Context): AppComponent
     }
 
-//    fun mainComponent(): MainComponent.Factory
-//    fun audioModeComponent(): AudioModeComponent.Factory
-//    fun readingModeComponent(): ReadingModeComponent.Factory
-//    fun booksPagerComponent(): BooksPagerComponent.Factory
-//    fun booksListComponent(): BooksListComponent.Factory
+    fun getAppContext(): Context
 }

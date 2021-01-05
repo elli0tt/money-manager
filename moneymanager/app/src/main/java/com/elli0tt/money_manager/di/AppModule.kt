@@ -7,12 +7,10 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-
 @Module
 object AppModule {
 
     @JvmStatic
-    @Singleton
     @Provides
     fun provideSharedPreferences(context: Context): SharedPreferences =
         context.getSharedPreferences(
@@ -20,4 +18,6 @@ object AppModule {
                 R.string.app_shared_preferences
             ), Context.MODE_PRIVATE
         )
+
+
 }
