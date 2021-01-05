@@ -1,23 +1,23 @@
-package com.elli0tt.feature_transaction_history.presentation.transaction_list
+package com.elli0tt.feature_transaction_history.presentation.add_transaction
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.elli0tt.feature_transaction_history.databinding.FragmentTransactionListBinding
-import com.elli0tt.feature_transaction_history.presentation.transaction_list.di.DaggerTransactionListComponent
+import com.elli0tt.feature_transaction_history.databinding.FragmentAddTransactionBinding
+import com.elli0tt.feature_transaction_history.presentation.add_transaction.di.DaggerAddTransactionComponent
 import com.elli0tt.money_manager.base.extensions.injectViewModel
 import com.elli0tt.money_manager.base.fragment.BaseFragment
 import javax.inject.Inject
 
-class TransactionListFragment : BaseFragment() {
+class AddTransactionFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var viewModel: TransactionListViewModel
+    private lateinit var viewModel: AddTransactionViewModel
 
-    private var _binding: FragmentTransactionListBinding? = null
+    private var _binding: FragmentAddTransactionBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,7 +25,7 @@ class TransactionListFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentTransactionListBinding.inflate(inflater, container, false)
+        _binding = FragmentAddTransactionBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -34,30 +34,16 @@ class TransactionListFragment : BaseFragment() {
 
         initDagger()
         subscribeToViewModel()
-        initViews()
     }
 
     private fun initDagger() {
-        DaggerTransactionListComponent.factory().create(appComponent).inject(this)
+        DaggerAddTransactionComponent.factory().create(appComponent).inject(this)
         viewModel = injectViewModel(viewModelFactory)
     }
 
     private fun subscribeToViewModel() {
         viewModel.text.observe(viewLifecycleOwner) {
             binding.text.text = it
-        }
-    }
-
-    private fun initViews() {
-        setListeners()
-    }
-
-    private fun setListeners() {
-        binding.apply {
-            button.setOnClickListener {
-//                findNavController().navigate(R.id.action_transactionListScreen_to_addTransactionScreen)
-//                findNavController().navigate()
-            }
         }
     }
 

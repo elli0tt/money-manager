@@ -7,5 +7,16 @@
     <fragment
         android:id="@+id/transactionListScreen"
         android:name="com.elli0tt.feature_transaction_history.presentation.transaction_list.TransactionListFragment"
-        android:label="DynamicFragment" />
+        android:label="DynamicFragment"
+        app:moduleName="money-manager.feature_transaction_history">
+        <action
+            android:id="@+id/action_transactionListScreen_to_addTransactionScreen"
+            app:destination="@id/addTransactionScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addTransactionScreen"
+        android:name="com.elli0tt.feature_transaction_history.presentation.add_transaction.AddTransactionFragment"
+        android:label="AddTransactionFragment"
+        app:moduleName="money-manager.feature_transaction_history" />
 </navigation>

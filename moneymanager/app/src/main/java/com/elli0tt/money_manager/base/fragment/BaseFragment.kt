@@ -1,6 +1,7 @@
 package com.elli0tt.money_manager.base.fragment
 
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.elli0tt.money_manager.App
 
 abstract class BaseFragment : Fragment() {
