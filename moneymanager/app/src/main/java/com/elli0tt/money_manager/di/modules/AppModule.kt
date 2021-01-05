@@ -1,4 +1,4 @@
-package com.elli0tt.money_manager.di
+package com.elli0tt.money_manager.di.modules
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -18,6 +18,4 @@ object AppModule {
                 R.string.app_shared_preferences
             ), Context.MODE_PRIVATE
         )
-
-
 }

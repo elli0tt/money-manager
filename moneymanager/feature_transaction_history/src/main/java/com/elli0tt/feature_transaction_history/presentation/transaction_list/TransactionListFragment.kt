@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.elli0tt.money_manager.R as appR
 import com.elli0tt.feature_transaction_history.databinding.FragmentTransactionListBinding
 import com.elli0tt.feature_transaction_history.presentation.transaction_list.di.DaggerTransactionListComponent
 import com.elli0tt.money_manager.base.extensions.injectViewModel
@@ -55,8 +57,7 @@ class TransactionListFragment : BaseFragment() {
     private fun setListeners() {
         binding.apply {
             button.setOnClickListener {
-//                findNavController().navigate(R.id.action_transactionListScreen_to_addTransactionScreen)
-//                findNavController().navigate()
+                findNavController().navigate(appR.id.action_transactionListScreen_to_addTransactionScreen)
             }
         }
     }

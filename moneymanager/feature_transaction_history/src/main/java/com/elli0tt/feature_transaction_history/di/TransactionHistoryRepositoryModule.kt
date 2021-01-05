@@ -4,7 +4,6 @@ import com.elli0tt.feature_transaction_history.data.repository.TransactionHistor
 import com.elli0tt.feature_transaction_history.domain.repository.TransactionHistoryRepository
 import dagger.Binds
 import dagger.Module
-import javax.inject.Singleton
 
 @Module
 abstract class TransactionHistoryRepositoryModule {
