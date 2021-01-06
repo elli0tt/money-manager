@@ -58,4 +58,10 @@ internal class TransactionListViewModel @Inject constructor(
             mockTransactionHistoryRepository.insertMockTransactionsList()
         }
     }
+
+    fun onDeleteAllTransactions() {
+        viewModelScope.launch(Dispatchers.IO) {
+            mockTransactionHistoryRepository.deleteAllTransactions()
+        }
+    }
 }

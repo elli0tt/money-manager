@@ -17,6 +17,10 @@ class MockTransactionHistoryRepositoryImpl @Inject constructor(
         transactionDao.insertTransactionsList(generateMockTransactionEntityList())
     }
 
+    override suspend fun deleteAllTransactions() {
+        transactionDao.deleteAllTransactions()
+    }
+
     private fun generateMockTransactionDomainList(): List<TransactionDomainModel> {
         val size = 50
         val result = ArrayList<TransactionDomainModel>(size)

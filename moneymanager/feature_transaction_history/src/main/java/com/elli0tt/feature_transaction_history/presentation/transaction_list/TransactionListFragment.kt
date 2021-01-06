@@ -60,6 +60,11 @@ class TransactionListFragment : BaseFragment(R.layout.fragment_transaction_list)
                         viewModel.onAddMockTransactionsList()
                         true
                     }
+                    R.id.delete_all_transactions_menu_item -> {
+                        viewModel.onDeleteAllTransactions()
+                        true
+                    }
+
                     else -> false
                 }
             }
