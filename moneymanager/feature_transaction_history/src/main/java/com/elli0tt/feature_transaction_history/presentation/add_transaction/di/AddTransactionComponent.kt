@@ -11,7 +11,6 @@ import dagger.Component
 @Component(
     dependencies = [AppComponent::class],
     modules = [
-        AppModule::class,
         ViewModelModule::class,
         TransactionHistoryRepositoryModule::class,
         AddTransactionModule::class

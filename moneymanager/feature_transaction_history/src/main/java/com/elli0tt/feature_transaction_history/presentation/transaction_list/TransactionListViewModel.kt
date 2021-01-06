@@ -7,11 +7,13 @@ import com.elli0tt.feature_transaction_history.domain.repository.TransactionHist
 import com.elli0tt.money_manager.base.view_model.BaseAction
 import com.elli0tt.money_manager.base.view_model.BaseViewModel
 import com.elli0tt.money_manager.base.view_model.BaseViewState
+import com.elli0tt.room_database.database.AppRoomDatabase
 import timber.log.Timber
 import javax.inject.Inject
 
 internal class TransactionListViewModel @Inject constructor(
-    private val transactionHistoryRepository: TransactionHistoryRepository
+    private val transactionHistoryRepository: TransactionHistoryRepository,
+    private val appRoomDatabase: AppRoomDatabase
 ) :
     BaseViewModel<TransactionListViewModel.ViewState, TransactionListViewModel.Action>() {
 
@@ -28,7 +30,7 @@ internal class TransactionListViewModel @Inject constructor(
     val text: LiveData<String> = _text
 
     init {
-        Timber.d("TransactionListViewModel init() $transactionHistoryRepository")
+        Timber.d("TransactionListViewModel init() $appRoomDatabase")
         _text.postValue("TransactionList ${transactionHistoryRepository.getMockData()}")
     }
 }

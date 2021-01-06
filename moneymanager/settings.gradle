@@ -1,3 +1,4 @@
+include ':room_database'
 include ':feature_transaction_statistics'
 include ':feature_transaction_template'
 include ':feature_transaction_history'

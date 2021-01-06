@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.elli0tt.money_manager.R as appR
 import com.elli0tt.feature_transaction_history.databinding.FragmentTransactionListBinding
 import com.elli0tt.feature_transaction_history.presentation.transaction_list.di.DaggerTransactionListComponent
 import com.elli0tt.money_manager.base.extensions.injectViewModel
 import com.elli0tt.money_manager.base.fragment.BaseFragment
 import javax.inject.Inject
+import com.elli0tt.money_manager.R as appR
 
 class TransactionListFragment : BaseFragment() {
 
