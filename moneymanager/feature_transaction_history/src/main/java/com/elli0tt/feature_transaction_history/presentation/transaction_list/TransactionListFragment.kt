@@ -54,7 +54,15 @@ class TransactionListFragment : BaseFragment(R.layout.fragment_transaction_list)
 
     private fun setListeners() {
         binding.apply {
-
+            toolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.add_mock_transactions_menu_item -> {
+                        viewModel.onAddMockTransactionsList()
+                        true
+                    }
+                    else -> false
+                }
+            }
         }
     }
 }

@@ -2,9 +2,10 @@ package com.elli0tt.room_database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.elli0tt.room_database.entities.TransactionEntity.Companion.TABLE_NAME
 import java.util.*
 
-@Entity(tableName = "transaction_table", )
+@Entity(tableName = TABLE_NAME)
 data class TransactionEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
@@ -12,4 +13,8 @@ data class TransactionEntity(
     var price: Double = 0.0,
     var date: Calendar = Calendar.getInstance(),
     var category: String = ""
-)
+) {
+    companion object {
+        const val TABLE_NAME = "transaction_table"
+    }
+}

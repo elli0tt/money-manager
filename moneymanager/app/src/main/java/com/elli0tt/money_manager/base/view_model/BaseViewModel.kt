@@ -22,7 +22,7 @@ abstract class BaseViewModel<ViewState : BaseViewState, ViewAction : BaseViewAct
     // Delegate will handle state event deduplication
     // (multiple states of the same type holding the same data will not be dispatched multiple times to LiveData stream)
     protected var state by Delegates.observable(initialState) { _, old, new ->
-        stateMutableLiveData.value = new
+        stateMutableLiveData.postValue(new)
 
         if (new != old) {
             stateTimeTravelDebugger?.apply {

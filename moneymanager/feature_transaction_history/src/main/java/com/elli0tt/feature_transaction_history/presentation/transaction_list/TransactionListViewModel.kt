@@ -1,14 +1,20 @@
 package com.elli0tt.feature_transaction_history.presentation.transaction_list
 
+import androidx.lifecycle.viewModelScope
 import com.elli0tt.feature_transaction_history.domain.model.TransactionDomainModel
+import com.elli0tt.feature_transaction_history.domain.repository.MockTransactionHistoryRepository
 import com.elli0tt.feature_transaction_history.domain.repository.TransactionHistoryRepository
 import com.elli0tt.money_manager.base.view_model.BaseViewAction
 import com.elli0tt.money_manager.base.view_model.BaseViewModel
 import com.elli0tt.money_manager.base.view_model.BaseViewState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 internal class TransactionListViewModel @Inject constructor(
-    private val transactionHistoryRepository: TransactionHistoryRepository
+    private val transactionHistoryRepository: TransactionHistoryRepository,
+    private val mockTransactionHistoryRepository: MockTransactionHistoryRepository
 ) :
     BaseViewModel<TransactionListViewModel.ViewState, TransactionListViewModel.ViewAction>(ViewState()) {
 
@@ -25,11 +31,15 @@ internal class TransactionListViewModel @Inject constructor(
     }
 
     init {
-        loadData()
+        subscribeToTransactionsListUpdates()
     }
 
-    private fun loadData() {
-        sendAction(ViewAction.TransactionListLoadingSuccess(transactionHistoryRepository.getTransactionHistoryList()))
+    private fun subscribeToTransactionsListUpdates() {
+        viewModelScope.launch(Dispatchers.IO) {
+            transactionHistoryRepository.transactionHistoryList.collect {
+                sendAction(ViewAction.TransactionListLoadingSuccess(it))
+            }
+        }
     }
 
     override fun onReduceState(viewAction: ViewAction): ViewState = when (viewAction) {
@@ -41,5 +51,11 @@ internal class TransactionListViewModel @Inject constructor(
             isLoading = false,
             transactionList = emptyList()
         )
+    }
+
+    fun onAddMockTransactionsList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            mockTransactionHistoryRepository.insertMockTransactionsList()
+        }
     }
 }

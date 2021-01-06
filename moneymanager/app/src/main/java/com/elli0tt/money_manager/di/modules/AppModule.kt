@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import com.elli0tt.money_manager.R
+import com.elli0tt.room_database.dao.TransactionDao
 import com.elli0tt.room_database.database.AppRoomDatabase
 import dagger.Module
 import dagger.Provides
@@ -34,4 +35,10 @@ object AppModule {
             .fallbackToDestructiveMigration()
             .build()
     }
+
+    @Singleton
+    @JvmStatic
+    @Provides
+    fun provideTransactionDao(appRoomDatabase: AppRoomDatabase): TransactionDao =
+        appRoomDatabase.getTransactionDao()
 }
