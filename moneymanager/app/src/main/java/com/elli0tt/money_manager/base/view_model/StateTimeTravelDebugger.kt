@@ -1,4 +1,4 @@
-package com.igorwojda.showcase.library.base.presentation.viewmodel
+package com.elli0tt.money_manager.base.view_model
 
 import timber.log.Timber
 import kotlin.reflect.full.memberProperties
@@ -7,9 +7,9 @@ import kotlin.reflect.full.memberProperties
 class StateTimeTravelDebugger(private val viewClassName: String) {
 
     private val stateTimeline = mutableListOf<StateTransition>()
-    private var lastViewAction: BaseAction? = null
+    private var lastViewAction: BaseViewAction? = null
 
-    fun addAction(viewAction: BaseAction) {
+    fun addAction(viewAction: BaseViewAction) {
         lastViewAction = viewAction
     }
 
@@ -30,10 +30,11 @@ class StateTimeTravelDebugger(private val viewClassName: String) {
         var message = ""
 
         stateTimeline.forEach { stateTransition ->
-            message += "Action: $viewClassName.${stateTransition.action.javaClass.simpleName}:\n"
+            message += "Action: $viewClassName.${stateTransition.viewAction.javaClass.simpleName}:\n"
 
             propertyNames.forEach { propertyName ->
-                val logLine = getLogLine(stateTransition.oldState, stateTransition.newState, propertyName)
+                val logLine =
+                    getLogLine(stateTransition.oldState, stateTransition.newState, propertyName)
                 message += logLine
             }
         }
@@ -50,7 +51,11 @@ class StateTimeTravelDebugger(private val viewClassName: String) {
         Timber.d(getMessage(states))
     }
 
-    private fun getLogLine(oldState: BaseViewState, newState: BaseViewState, propertyName: String): String {
+    private fun getLogLine(
+        oldState: BaseViewState,
+        newState: BaseViewState,
+        propertyName: String
+    ): String {
         val oldValue = getPropertyValue(oldState, propertyName)
         val newValue = getPropertyValue(newState, propertyName)
         val indent = "\t"
@@ -84,7 +89,7 @@ class StateTimeTravelDebugger(private val viewClassName: String) {
 
     private data class StateTransition(
         val oldState: BaseViewState,
-        val action: BaseAction,
+        val viewAction: BaseViewAction,
         val newState: BaseViewState
     )
 }

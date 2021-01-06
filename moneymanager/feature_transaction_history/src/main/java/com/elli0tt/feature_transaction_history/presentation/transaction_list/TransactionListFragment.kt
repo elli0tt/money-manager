@@ -1,35 +1,26 @@
 package com.elli0tt.feature_transaction_history.presentation.transaction_list
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import com.elli0tt.feature_transaction_history.R
 import com.elli0tt.feature_transaction_history.databinding.FragmentTransactionListBinding
+import com.elli0tt.feature_transaction_history.presentation.adapter.TransactionRecyclerAdapter
 import com.elli0tt.feature_transaction_history.presentation.transaction_list.di.DaggerTransactionListComponent
 import com.elli0tt.money_manager.base.extensions.injectViewModel
+import com.elli0tt.money_manager.base.extensions.viewBinding
 import com.elli0tt.money_manager.base.fragment.BaseFragment
 import javax.inject.Inject
-import com.elli0tt.money_manager.R as appR
 
-class TransactionListFragment : BaseFragment() {
+class TransactionListFragment : BaseFragment(R.layout.fragment_transaction_list) {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: TransactionListViewModel
 
-    private var _binding: FragmentTransactionListBinding? = null
-    private val binding get() = _binding!!
+    private val binding by viewBinding(FragmentTransactionListBinding::bind)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentTransactionListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private val transactionRecyclerAdapter = TransactionRecyclerAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,25 +36,25 @@ class TransactionListFragment : BaseFragment() {
     }
 
     private fun subscribeToViewModel() {
-        viewModel.text.observe(viewLifecycleOwner) {
-            binding.text.text = it
+        viewModel.stateLiveData.observe(viewLifecycleOwner) {
+            transactionRecyclerAdapter.submitList(it.transactionList)
         }
     }
 
     private fun initViews() {
+        initRecyclerView()
         setListeners()
+    }
+
+    private fun initRecyclerView() {
+        binding.transactionRecyclerView.apply {
+            adapter = transactionRecyclerAdapter
+        }
     }
 
     private fun setListeners() {
         binding.apply {
-            button.setOnClickListener {
-                findNavController().navigate(appR.id.action_transactionListScreen_to_addTransactionScreen)
-            }
-        }
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        }
     }
 }
