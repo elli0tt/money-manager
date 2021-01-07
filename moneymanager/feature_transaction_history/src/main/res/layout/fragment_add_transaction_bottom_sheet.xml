@@ -64,10 +64,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/transaction_type_radio_group" />
 
+    <com.elli0tt.money_manager.custom_view.ButtonWithRemoveIcon
+        android:id="@+id/pick_date_button_with_remove_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:icon="@drawable/ic_round_today_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_to_templates_check_box"
+        app:showRemoveIcon="false" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/save_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/add_transaction_save"
-        app:layout_constraintTop_toBottomOf="@id/add_to_templates_check_box" />
+        app:layout_constraintTop_toBottomOf="@id/pick_date_button_with_remove_icon" />
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/content_loading_progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

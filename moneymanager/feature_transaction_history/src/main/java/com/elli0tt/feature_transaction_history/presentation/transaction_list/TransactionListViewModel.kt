@@ -7,7 +7,6 @@ import com.elli0tt.feature_transaction_history.domain.repository.TransactionHist
 import com.elli0tt.money_manager.base.view_model.BaseViewAction
 import com.elli0tt.money_manager.base.view_model.BaseViewModel
 import com.elli0tt.money_manager.base.view_model.BaseViewState
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -35,7 +34,7 @@ internal class TransactionListViewModel @Inject constructor(
     }
 
     private fun subscribeToTransactionsListUpdates() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             transactionHistoryRepository.transactionHistoryList.collect {
                 sendAction(ViewAction.TransactionListLoadingSuccess(it))
             }
@@ -54,13 +53,13 @@ internal class TransactionListViewModel @Inject constructor(
     }
 
     fun onAddMockTransactionsList() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             mockTransactionHistoryRepository.insertMockTransactionsList()
         }
     }
 
     fun onDeleteAllTransactions() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             mockTransactionHistoryRepository.deleteAllTransactions()
         }
     }

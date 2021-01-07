@@ -1,5 +1,6 @@
 package com.elli0tt.feature_transaction_history.presentation.add_transaction
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -9,6 +10,8 @@ import com.elli0tt.feature_transaction_history.presentation.add_transaction.di.D
 import com.elli0tt.money_manager.base.extensions.injectViewModel
 import com.elli0tt.money_manager.base.extensions.viewBinding
 import com.elli0tt.money_manager.base.fragment.BaseBottomSheetDialogFragment
+import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 class AddTransactionBottomSheetFragment :
@@ -28,8 +31,9 @@ class AddTransactionBottomSheetFragment :
         super.onViewCreated(view, savedInstanceState)
 
         initDagger()
-        subscribeToViewModel()
         initViews()
+        render(viewModel.initialState)
+        subscribeToViewModel()
     }
 
     private fun initDagger() {
@@ -37,11 +41,24 @@ class AddTransactionBottomSheetFragment :
         viewModel = injectViewModel(viewModelFactory)
     }
 
+    private fun render(viewState: AddTransactionBottomSheetViewModel.ViewState) {
+        showProgress(viewState.isShowProgress)
+        binding.pickDateButtonWithRemoveIcon.setText(viewState.dateString)
+        if (viewState.isShowDatePickDialog) {
+            showPickDateDialog(
+                viewState.date.get(Calendar.YEAR),
+                viewState.date.get(Calendar.MONTH),
+                viewState.date.get(Calendar.DAY_OF_MONTH)
+            )
+        }
+        if (viewState.isSavedSuccessfully) {
+            dismiss()
+        }
+    }
+
     private fun subscribeToViewModel() {
         viewModel.stateLiveData.observe(viewLifecycleOwner) {
-            if (it.isSavedSuccessfully) {
-                dismiss()
-            }
+            render(it)
         }
     }
 
@@ -51,14 +68,58 @@ class AddTransactionBottomSheetFragment :
 
     private fun setListeners() {
         binding.apply {
-            saveButton.setOnClickListener {
-                viewModel.onSave(
+            saveButton.setOnClickListener(saveButtonOnClickListener)
+            pickDateButtonWithRemoveIcon.setOnClickListener(
+                pickDateButtonWithRemoveIconOnClickListener
+            )
+        }
+    }
+
+    private val saveButtonOnClickListener = View.OnClickListener {
+        binding.apply {
+            viewModel.sendAction(
+                AddTransactionBottomSheetViewModel.ViewAction.StartSavingTransaction(
                     name = nameTextInputEditText.text.toString(),
                     price = priceTextInputEditText.text.toString().toDouble(),
                     transactionTypeId = transactionTypeRadioGroup.checkedRadioButtonId,
                     addToTemplates = addToTemplatesCheckBox.isChecked
                 )
-            }
+            )
+        }
+    }
+
+    private val pickDateButtonWithRemoveIconOnClickListener = View.OnClickListener {
+        viewModel.sendAction(AddTransactionBottomSheetViewModel.ViewAction.StartPickingDate)
+    }
+
+    private fun showPickDateDialog(year: Int, month: Int, dayOfMonth: Int) {
+        DatePickerDialog(
+            requireContext(),
+            datePickerDialogOnDateSetListener,
+            year,
+            month,
+            dayOfMonth
+        ).show()
+    }
+
+    private val datePickerDialogOnDateSetListener =
+        DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+            viewModel.sendAction(
+                AddTransactionBottomSheetViewModel.ViewAction.NewDatePicked(
+                    year,
+                    month,
+                    dayOfMonth
+                )
+            )
+        }
+
+    private fun showProgress(isShowProgress: Boolean) {
+        if (isShowProgress) {
+            Timber.d("Progress is shown")
+            binding.contentLoadingProgressBar.show()
+        } else {
+            Timber.d("Progress is hidden")
+            binding.contentLoadingProgressBar.hide()
         }
     }
 }

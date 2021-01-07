@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.elli0tt.money_manager.BuildConfig
 import kotlin.properties.Delegates
 
-abstract class BaseViewModel<ViewState : BaseViewState, ViewAction : BaseViewAction>(initialState: ViewState) :
+abstract class BaseViewModel<ViewState : BaseViewState, ViewAction : BaseViewAction>(val initialState: ViewState) :
     ViewModel() {
     private val stateMutableLiveData = MutableLiveData<ViewState>()
     val stateLiveData: LiveData<ViewState> = stateMutableLiveData
