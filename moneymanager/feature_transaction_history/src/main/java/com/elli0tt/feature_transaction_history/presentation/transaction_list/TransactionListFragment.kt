@@ -2,10 +2,12 @@ package com.elli0tt.feature_transaction_history.presentation.transaction_list
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import com.elli0tt.feature_transaction_history.R
 import com.elli0tt.feature_transaction_history.databinding.FragmentTransactionListBinding
 import com.elli0tt.feature_transaction_history.presentation.adapter.TransactionRecyclerAdapter
+import com.elli0tt.feature_transaction_history.presentation.add_transaction.AddTransactionBottomSheetFragment
 import com.elli0tt.feature_transaction_history.presentation.transaction_list.di.DaggerTransactionListComponent
 import com.elli0tt.money_manager.base.extensions.injectViewModel
 import com.elli0tt.money_manager.base.extensions.viewBinding
@@ -21,6 +23,8 @@ class TransactionListFragment : BaseFragment(R.layout.fragment_transaction_list)
     private val binding by viewBinding(FragmentTransactionListBinding::bind)
 
     private val transactionRecyclerAdapter = TransactionRecyclerAdapter()
+
+    private lateinit var addTransactionBottomSheetFragment: AddTransactionBottomSheetFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,20 +58,35 @@ class TransactionListFragment : BaseFragment(R.layout.fragment_transaction_list)
 
     private fun setListeners() {
         binding.apply {
-            toolbar.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.add_mock_transactions_menu_item -> {
-                        viewModel.onAddMockTransactionsList()
-                        true
-                    }
-                    R.id.delete_all_transactions_menu_item -> {
-                        viewModel.onDeleteAllTransactions()
-                        true
-                    }
-
-                    else -> false
-                }
-            }
+            toolbar.setOnMenuItemClickListener(toolbarMenuItemClickListener)
+            addTransactionFab.setOnClickListener(addTransactionFabOnClickListener)
         }
+    }
+
+    private val toolbarMenuItemClickListener = Toolbar.OnMenuItemClickListener {
+        when (it.itemId) {
+            R.id.add_mock_transactions_menu_item -> {
+                viewModel.onAddMockTransactionsList()
+                true
+            }
+            R.id.delete_all_transactions_menu_item -> {
+                viewModel.onDeleteAllTransactions()
+                true
+            }
+
+            else -> false
+        }
+    }
+
+    private val addTransactionFabOnClickListener = View.OnClickListener {
+        openAddTransactionBottomSheetFragment()
+    }
+
+    private fun openAddTransactionBottomSheetFragment() {
+        addTransactionBottomSheetFragment = AddTransactionBottomSheetFragment()
+        addTransactionBottomSheetFragment.show(
+            childFragmentManager,
+            AddTransactionBottomSheetFragment.TAG
+        )
     }
 }

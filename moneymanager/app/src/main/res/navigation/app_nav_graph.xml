@@ -6,15 +6,5 @@
 
     <fragment
         android:id="@+id/transactionListScreen"
-        android:name="com.elli0tt.feature_transaction_history.presentation.transaction_list.TransactionListFragment"
-        android:label="DynamicFragment">
-        <action
-            android:id="@+id/action_transactionListScreen_to_addTransactionScreen"
-            app:destination="@id/addTransactionScreen" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/addTransactionScreen"
-        android:name="com.elli0tt.feature_transaction_history.presentation.add_transaction.AddTransactionFragment"
-        android:label="AddTransactionFragment" />
+        android:name="com.elli0tt.feature_transaction_history.presentation.transaction_list.TransactionListFragment" />
 </navigation>

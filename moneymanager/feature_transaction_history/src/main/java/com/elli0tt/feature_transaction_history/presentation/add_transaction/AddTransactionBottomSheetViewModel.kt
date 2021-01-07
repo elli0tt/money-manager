@@ -6,9 +6,9 @@ import com.elli0tt.money_manager.base.view_model.BaseViewModel
 import com.elli0tt.money_manager.base.view_model.BaseViewState
 import javax.inject.Inject
 
-internal class AddTransactionViewModel @Inject constructor(
+internal class AddTransactionBottomSheetViewModel @Inject constructor(
     private val transactionHistoryRepository: TransactionHistoryRepository
-) : BaseViewModel<AddTransactionViewModel.ViewState, AddTransactionViewModel.ViewAction>(ViewState()) {
+) : BaseViewModel<AddTransactionBottomSheetViewModel.ViewState, AddTransactionBottomSheetViewModel.ViewAction>(ViewState()) {
 
     internal data class ViewState(var isLoading: Boolean = false) : BaseViewState
 
