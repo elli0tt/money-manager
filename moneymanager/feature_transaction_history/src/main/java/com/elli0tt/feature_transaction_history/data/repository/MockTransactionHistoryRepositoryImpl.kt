@@ -1,9 +1,11 @@
 package com.elli0tt.feature_transaction_history.data.repository
 
+import com.elli0tt.feature_transaction_history.domain.enums.TransactionDomainType
 import com.elli0tt.feature_transaction_history.domain.model.TransactionDomainModel
 import com.elli0tt.feature_transaction_history.domain.repository.MockTransactionHistoryRepository
 import com.elli0tt.room_database.dao.TransactionDao
 import com.elli0tt.room_database.entities.TransactionEntity
+import com.elli0tt.room_database.enums.TransactionRoomType
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -27,11 +29,12 @@ class MockTransactionHistoryRepositoryImpl @Inject constructor(
         for (i in 0 until size) {
             result.add(
                 TransactionDomainModel(
-                    id = i + 1,
+                    id = 0,
                     name = "Проезд в маршрутке $i",
                     price = 30.0,
                     date = Calendar.getInstance(),
-                    category = "Транспорт"
+                    category = "Транспорт",
+                    transactionType = if (i % 2 == 0) TransactionDomainType.EXPENSE else TransactionDomainType.INCOME
                 )
             )
         }
@@ -44,11 +47,12 @@ class MockTransactionHistoryRepositoryImpl @Inject constructor(
         for (i in 0 until size) {
             result.add(
                 TransactionEntity(
-                    id = i + 1,
+                    id = 0,
                     name = "Проезд в маршрутке $i",
-                    price = 30.0,
+                    price = 30.0 + i * 3,
                     date = Calendar.getInstance(),
-                    category = "Транспорт"
+                    category = "Транспорт",
+                    transactionType = if (i % 2 == 0) TransactionRoomType.EXPENSE else TransactionRoomType.INCOME
                 )
             )
         }

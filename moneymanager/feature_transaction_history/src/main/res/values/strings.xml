@@ -7,4 +7,5 @@
     <string name="add_transaction_add_to_templates">Add to templates</string>
     <string name="add_transaction_name">Name</string>
     <string name="add_transaction_price">Price</string>
+    <string name="add_transaction_save">Save</string>
 </resources>

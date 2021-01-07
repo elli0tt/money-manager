@@ -6,9 +6,10 @@ import androidx.room.TypeConverters
 import com.elli0tt.room_database.dao.TransactionDao
 import com.elli0tt.room_database.entities.TransactionEntity
 import com.elli0tt.room_database.type_convertes.CalendarConverter
+import com.elli0tt.room_database.type_convertes.TransactionRoomTypeConverter
 
 @Database(entities = [TransactionEntity::class], version = 1)
-@TypeConverters(CalendarConverter::class)
+@TypeConverters(CalendarConverter::class, TransactionRoomTypeConverter::class)
 abstract class AppRoomDatabase : RoomDatabase() {
 
     abstract fun getTransactionDao(): TransactionDao

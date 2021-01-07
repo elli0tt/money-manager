@@ -6,9 +6,7 @@ import java.util.*
 class CalendarConverter {
 
     @TypeConverter
-    fun fromCalendar(calendar: Calendar): Long {
-        return calendar.timeInMillis
-    }
+    fun fromCalendar(calendar: Calendar): Long = calendar.timeInMillis
 
     @TypeConverter
     fun toCalendar(timeInMillis: Long): Calendar {

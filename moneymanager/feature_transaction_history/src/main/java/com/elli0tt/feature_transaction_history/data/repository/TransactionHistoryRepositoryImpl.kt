@@ -4,11 +4,10 @@ import com.elli0tt.feature_transaction_history.domain.mapper.TransactionEntityTo
 import com.elli0tt.feature_transaction_history.domain.model.TransactionDomainModel
 import com.elli0tt.feature_transaction_history.domain.repository.TransactionHistoryRepository
 import com.elli0tt.room_database.dao.TransactionDao
+import com.elli0tt.room_database.entities.TransactionEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class TransactionHistoryRepositoryImpl @Inject constructor(
     private val transactionDao: TransactionDao,
@@ -23,4 +22,8 @@ class TransactionHistoryRepositoryImpl @Inject constructor(
                     transactionEntityToDomainMapper.map(it)
                 }
             }
+
+    override suspend fun insertTransaction(transaction: TransactionEntity) {
+        transactionDao.insertTransaction(transaction)
+    }
 }

@@ -29,6 +29,7 @@ class AddTransactionBottomSheetFragment :
 
         initDagger()
         subscribeToViewModel()
+        initViews()
     }
 
     private fun initDagger() {
@@ -37,6 +38,27 @@ class AddTransactionBottomSheetFragment :
     }
 
     private fun subscribeToViewModel() {
+        viewModel.stateLiveData.observe(viewLifecycleOwner) {
+            if (it.isSavedSuccessfully) {
+                dismiss()
+            }
+        }
+    }
 
+    private fun initViews() {
+        setListeners()
+    }
+
+    private fun setListeners() {
+        binding.apply {
+            saveButton.setOnClickListener {
+                viewModel.onSave(
+                    name = nameTextInputEditText.text.toString(),
+                    price = priceTextInputEditText.text.toString().toDouble(),
+                    transactionTypeId = transactionTypeRadioGroup.checkedRadioButtonId,
+                    addToTemplates = addToTemplatesCheckBox.isChecked
+                )
+            }
+        }
     }
 }

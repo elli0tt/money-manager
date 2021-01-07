@@ -29,7 +29,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/price_text_input_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <RadioGroup
@@ -63,4 +64,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/transaction_type_radio_group" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_transaction_save"
+        app:layout_constraintTop_toBottomOf="@id/add_to_templates_check_box" />
 </androidx.constraintlayout.widget.ConstraintLayout>
