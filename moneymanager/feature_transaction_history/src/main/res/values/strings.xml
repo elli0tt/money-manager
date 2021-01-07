@@ -2,4 +2,9 @@
 <resources>
     <string name="add_mock_transactions_menu_item_title">Add mock transactions</string>
     <string name="delete_all_transactions_menu_item_title">Delete all</string>
+    <string name="add_transaction_income">Income</string>
+    <string name="add_transaction_expense">Expense</string>
+    <string name="add_transaction_add_to_templates">Add to templates</string>
+    <string name="add_transaction_name">Name</string>
+    <string name="add_transaction_price">Price</string>
 </resources>

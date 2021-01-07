@@ -3,16 +3,64 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="200dp">
+    android:padding="16dp">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name_text_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_transaction_name"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_text_input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/price_text_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/add_transaction_price"
+        app:layout_constraintTop_toBottomOf="@id/name_text_input_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/price_text_input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/transaction_type_radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Transaction bottom sheet"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:checkedButton="@id/expense_radio_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/price_text_input_layout">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/expense_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_transaction_expense" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/income_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_transaction_income" />
+
+    </RadioGroup>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/add_to_templates_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_transaction_add_to_templates"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/transaction_type_radio_group" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
