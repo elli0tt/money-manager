@@ -19,14 +19,22 @@ internal class TransactionListViewModel @Inject constructor(
 
     internal data class ViewState(
         val isLoading: Boolean = false,
-        val transactionList: List<TransactionDomainModel> = emptyList()
+        val transactionList: List<TransactionDomainModel> = emptyList(),
+        val isOpenAddTransactionBottomSheet: Boolean = false
     ) : BaseViewState
 
     internal sealed class ViewAction : BaseViewAction {
+        object TransactionListLoading : ViewAction()
         data class TransactionListLoadingSuccess(val transactionList: List<TransactionDomainModel>) :
             ViewAction()
 
         object TransactionListLoadingFailure : ViewAction()
+
+        object OpenAddTransactionScreen : ViewAction()
+        object CloseAddTransactionScreen : ViewAction()
+
+        object AddMockTransactionList : ViewAction()
+        object DeleteAllTransactions : ViewAction()
     }
 
     init {
@@ -42,6 +50,7 @@ internal class TransactionListViewModel @Inject constructor(
     }
 
     override fun onReduceState(viewAction: ViewAction): ViewState = when (viewAction) {
+        is ViewAction.TransactionListLoading -> state.copy(isLoading = true)
         is ViewAction.TransactionListLoadingSuccess -> state.copy(
             isLoading = false,
             transactionList = viewAction.transactionList
@@ -50,17 +59,23 @@ internal class TransactionListViewModel @Inject constructor(
             isLoading = false,
             transactionList = emptyList()
         )
+        is ViewAction.OpenAddTransactionScreen -> state.copy(isOpenAddTransactionBottomSheet = true)
+        is ViewAction.CloseAddTransactionScreen -> state.copy(isOpenAddTransactionBottomSheet = false)
+        is ViewAction.AddMockTransactionList -> onAddMockTransactionsList()
+        is ViewAction.DeleteAllTransactions -> onDeleteAllTransactions()
     }
 
-    fun onAddMockTransactionsList() {
+    private fun onAddMockTransactionsList(): ViewState {
         viewModelScope.launch {
             mockTransactionHistoryRepository.insertMockTransactionsList()
         }
+        return state
     }
 
-    fun onDeleteAllTransactions() {
+    private fun onDeleteAllTransactions(): ViewState {
         viewModelScope.launch {
             mockTransactionHistoryRepository.deleteAllTransactions()
         }
+        return state
     }
 }

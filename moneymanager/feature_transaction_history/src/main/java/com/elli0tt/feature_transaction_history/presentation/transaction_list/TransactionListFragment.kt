@@ -12,6 +12,7 @@ import com.elli0tt.feature_transaction_history.presentation.transaction_list.di.
 import com.elli0tt.money_manager.base.extensions.injectViewModel
 import com.elli0tt.money_manager.base.extensions.viewBinding
 import com.elli0tt.money_manager.base.fragment.BaseFragment
+import timber.log.Timber
 import javax.inject.Inject
 
 class TransactionListFragment : BaseFragment(R.layout.fragment_transaction_list) {
@@ -30,18 +31,27 @@ class TransactionListFragment : BaseFragment(R.layout.fragment_transaction_list)
         super.onViewCreated(view, savedInstanceState)
 
         initDagger()
-        subscribeToViewModel()
         initViews()
+        render(viewModel.initialState)
+        subscribeToViewModel()
     }
 
     private fun initDagger() {
         DaggerTransactionListComponent.factory().create(appComponent).inject(this)
         viewModel = injectViewModel(viewModelFactory)
+        Timber.d("TransactionListViewModel $viewModel")
+    }
+
+    private fun render(viewState: TransactionListViewModel.ViewState) {
+        transactionRecyclerAdapter.submitList(viewState.transactionList)
+        if (viewState.isOpenAddTransactionBottomSheet) {
+            openAddTransactionBottomSheetFragment()
+        }
     }
 
     private fun subscribeToViewModel() {
         viewModel.stateLiveData.observe(viewLifecycleOwner) {
-            transactionRecyclerAdapter.submitList(it.transactionList)
+            render(it)
         }
     }
 
@@ -53,6 +63,7 @@ class TransactionListFragment : BaseFragment(R.layout.fragment_transaction_list)
     private fun initRecyclerView() {
         binding.transactionRecyclerView.apply {
             adapter = transactionRecyclerAdapter
+            setHasFixedSize(true)
         }
     }
 
@@ -66,11 +77,11 @@ class TransactionListFragment : BaseFragment(R.layout.fragment_transaction_list)
     private val toolbarMenuItemClickListener = Toolbar.OnMenuItemClickListener {
         when (it.itemId) {
             R.id.add_mock_transactions_menu_item -> {
-                viewModel.onAddMockTransactionsList()
+                viewModel.sendAction(TransactionListViewModel.ViewAction.AddMockTransactionList)
                 true
             }
             R.id.delete_all_transactions_menu_item -> {
-                viewModel.onDeleteAllTransactions()
+                viewModel.sendAction(TransactionListViewModel.ViewAction.DeleteAllTransactions)
                 true
             }
 
@@ -79,11 +90,12 @@ class TransactionListFragment : BaseFragment(R.layout.fragment_transaction_list)
     }
 
     private val addTransactionFabOnClickListener = View.OnClickListener {
-        openAddTransactionBottomSheetFragment()
+        viewModel.sendAction(TransactionListViewModel.ViewAction.OpenAddTransactionScreen)
     }
 
     private fun openAddTransactionBottomSheetFragment() {
         addTransactionBottomSheetFragment = AddTransactionBottomSheetFragment()
+        addTransactionBottomSheetFragment.transactionListViewModel = viewModel
         addTransactionBottomSheetFragment.show(
             childFragmentManager,
             AddTransactionBottomSheetFragment.TAG

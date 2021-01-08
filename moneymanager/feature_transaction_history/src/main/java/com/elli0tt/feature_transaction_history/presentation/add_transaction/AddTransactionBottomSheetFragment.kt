@@ -1,12 +1,14 @@
 package com.elli0tt.feature_transaction_history.presentation.add_transaction
 
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.elli0tt.feature_transaction_history.R
 import com.elli0tt.feature_transaction_history.databinding.FragmentAddTransactionBottomSheetBinding
 import com.elli0tt.feature_transaction_history.presentation.add_transaction.di.DaggerAddTransactionBottomSheetComponent
+import com.elli0tt.feature_transaction_history.presentation.transaction_list.TransactionListViewModel
 import com.elli0tt.money_manager.base.extensions.injectViewModel
 import com.elli0tt.money_manager.base.extensions.viewBinding
 import com.elli0tt.money_manager.base.fragment.BaseBottomSheetDialogFragment
@@ -24,6 +26,7 @@ class AddTransactionBottomSheetFragment :
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: AddTransactionBottomSheetViewModel
+    internal lateinit var transactionListViewModel: TransactionListViewModel
 
     private val binding by viewBinding(FragmentAddTransactionBottomSheetBinding::bind)
 
@@ -121,5 +124,10 @@ class AddTransactionBottomSheetFragment :
             Timber.d("Progress is hidden")
             binding.contentLoadingProgressBar.hide()
         }
+    }
+
+    override fun onCancel(dialog: DialogInterface) {
+        super.onCancel(dialog)
+        transactionListViewModel.sendAction(TransactionListViewModel.ViewAction.CloseAddTransactionScreen)
     }
 }
