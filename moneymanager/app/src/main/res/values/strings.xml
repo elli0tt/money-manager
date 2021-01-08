@@ -6,4 +6,5 @@
     <string name="title_feature_transaction_template">Feature Transaction Template</string>
     <string name="title_feature_statistics">Feature Statistics</string>
     <string name="title_feature_transaction_statistics">Feature Transaction_Statistics</string>
+    <string name="title_feature_settings">Feature Settings</string>
 </resources>

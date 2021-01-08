@@ -33,7 +33,7 @@ android {
     }
     dynamicFeatures = [':feature_transaction_history',
                        ':feature_transaction_template',
-                       ':feature_transaction_statistics']
+                       ':feature_transaction_statistics', ':feature_settings']
     buildFeatures {
         viewBinding true
     }
