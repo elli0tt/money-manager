@@ -9,6 +9,8 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class AddTransactionBottomSheetModule {
+
+    @AddTransactionBottomSheetScope
     @Binds
     @IntoMap
     @ViewModelKey(AddTransactionBottomSheetViewModel::class)

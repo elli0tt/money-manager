@@ -10,6 +10,7 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class TransactionListModule {
 
+    @TransactionListScope
     @Binds
     @IntoMap
     @ViewModelKey(TransactionListViewModel::class)

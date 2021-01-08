@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dynamic_nav_graph"
     app:moduleName="money-manager.dynamic_feature"
-    app:startDestination="@id/transactionListScreen">
+    app:startDestination="@id/transactionListFragment">
 
     <fragment
-        android:id="@+id/transactionListScreen"
+        android:id="@+id/transactionListFragment"
         android:name="com.elli0tt.feature_transaction_history.presentation.transaction_list.TransactionListFragment"
         android:label="DynamicFragment" />
 </navigation>

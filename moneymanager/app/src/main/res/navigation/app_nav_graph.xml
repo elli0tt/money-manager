@@ -2,9 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/transactionListScreen">
+    app:startDestination="@id/statisticsFragment">
 
     <fragment
-        android:id="@+id/transactionListScreen"
+        android:id="@+id/transactionListFragment"
         android:name="com.elli0tt.feature_transaction_history.presentation.transaction_list.TransactionListFragment" />
+
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.elli0tt.feature_transaction_statistics.presentation.StatisticsFragment" />
 </navigation>

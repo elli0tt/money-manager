@@ -1,7 +1,9 @@
 package com.elli0tt.money_manager
 
+import androidx.viewbinding.BuildConfig
 import com.elli0tt.money_manager.di.AppComponent
 import com.elli0tt.money_manager.di.DaggerAppComponent
+import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.android.play.core.splitcompat.SplitCompatApplication
 import timber.log.Timber
 
@@ -12,6 +14,7 @@ class App : SplitCompatApplication() {
     override fun onCreate() {
         super.onCreate()
 
+        SplitCompat.install(this)
         initTimber()
         initAppComponent()
     }
