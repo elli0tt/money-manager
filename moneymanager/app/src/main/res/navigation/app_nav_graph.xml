@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/settingsFragment">
+    app:startDestination="@id/transactionTemplatesListFragment">
 
     <fragment
         android:id="@+id/transactionListFragment"
@@ -15,4 +15,8 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.elli0tt.feature_settings.presentation.SettingsFragment" />
+
+    <fragment
+        android:id="@+id/transactionTemplatesListFragment"
+        android:name="com.elli0tt.feature_transaction_template.presentation.TransactionTemplatesListFragment" />
 </navigation>
