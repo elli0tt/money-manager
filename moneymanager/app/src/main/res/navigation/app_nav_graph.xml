@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/statisticsFragment">
+    app:startDestination="@id/settingsFragment">
 
     <fragment
         android:id="@+id/transactionListFragment"
@@ -11,4 +11,8 @@
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.elli0tt.feature_transaction_statistics.presentation.StatisticsFragment" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.elli0tt.feature_settings.presentation.SettingsFragment" />
 </navigation>
