@@ -14,7 +14,6 @@ class App : SplitCompatApplication() {
     override fun onCreate() {
         super.onCreate()
 
-        SplitCompat.install(this)
         initTimber()
         initAppComponent()
     }

@@ -55,6 +55,7 @@ class AddTransactionBottomSheetFragment :
             )
         }
         if (viewState.isSavedSuccessfully) {
+            transactionListViewModel.sendAction(TransactionListViewModel.ViewAction.CloseAddTransactionScreen)
             dismiss()
         }
     }
@@ -128,6 +129,7 @@ class AddTransactionBottomSheetFragment :
 
     override fun onCancel(dialog: DialogInterface) {
         super.onCancel(dialog)
+        Timber.d("AddTransactionBottomSheet onCancel()")
         transactionListViewModel.sendAction(TransactionListViewModel.ViewAction.CloseAddTransactionScreen)
     }
 }
