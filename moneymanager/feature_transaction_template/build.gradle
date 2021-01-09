@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation project(":app")
+    implementation project(path: ':room_database')
 
     kapt 'com.google.dagger:dagger-compiler:2.28.1'
 }

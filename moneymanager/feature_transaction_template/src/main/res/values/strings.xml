@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_mock_templates_menu_item_title">Add mock transactions</string>
+    <string name="delete_all_templates_menu_item_title">Delete all</string>
+    <string name="add_mock_template_menu_item_title">Add mock templates</string>
+    <string name="delete_all_menu_item_title">Delete all</string>
+</resources>

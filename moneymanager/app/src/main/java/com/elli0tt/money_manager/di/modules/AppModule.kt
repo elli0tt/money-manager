@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import com.elli0tt.money_manager.R
+import com.elli0tt.room_database.dao.TemplateDao
 import com.elli0tt.room_database.dao.TransactionDao
 import com.elli0tt.room_database.database.AppRoomDatabase
 import dagger.Module
@@ -40,5 +41,11 @@ object AppModule {
     @JvmStatic
     @Provides
     fun provideTransactionDao(appRoomDatabase: AppRoomDatabase): TransactionDao =
-        appRoomDatabase.getTransactionDao()
+        appRoomDatabase.transactionDao
+
+    @Singleton
+    @JvmStatic
+    @Provides
+    fun provideTemplateDao(appRoomDatabase: AppRoomDatabase): TemplateDao =
+        appRoomDatabase.templateDao
 }

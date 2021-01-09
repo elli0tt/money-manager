@@ -2,9 +2,11 @@ package com.elli0tt.feature_transaction_template.presentation
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import com.elli0tt.feature_transaction_template.R
 import com.elli0tt.feature_transaction_template.databinding.FragmentTransactionTemplatesListBinding
+import com.elli0tt.feature_transaction_template.presentation.adapter.TemplatesRecyclerAdapter
 import com.elli0tt.feature_transaction_template.presentation.di.DaggerTransactionTemplatesListComponent
 import com.elli0tt.money_manager.base.extensions.injectViewModel
 import com.elli0tt.money_manager.base.extensions.viewBinding
@@ -19,6 +21,8 @@ class TransactionTemplatesListFragment :
     private lateinit var viewModel: TransactionTemplatesListViewModel
 
     private val binding by viewBinding(FragmentTransactionTemplatesListBinding::bind)
+
+    private val templatesRecyclerAdapter = TemplatesRecyclerAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,7 +39,7 @@ class TransactionTemplatesListFragment :
     }
 
     private fun render(viewState: TransactionTemplatesListViewModel.ViewState) {
-
+        templatesRecyclerAdapter.submitList(viewState.templatesList)
     }
 
     private fun subscribeToViewModel() {
@@ -45,10 +49,35 @@ class TransactionTemplatesListFragment :
     }
 
     private fun initViews() {
+        initRecyclerView()
         setListeners()
     }
 
-    private fun setListeners() {
+    private fun initRecyclerView() {
+        binding.templatesRecyclerView.apply {
+            adapter = templatesRecyclerAdapter
+            setHasFixedSize(true)
+        }
+    }
 
+    private fun setListeners() {
+        binding.apply {
+            toolbar.setOnMenuItemClickListener(toolbarMenuItemClickListener)
+        }
+    }
+
+    private val toolbarMenuItemClickListener = Toolbar.OnMenuItemClickListener {
+        when (it.itemId) {
+            R.id.add_mock_templates_menu_item -> {
+                viewModel.sendAction(TransactionTemplatesListViewModel.ViewAction.AddMockTemplatesList)
+                true
+            }
+            R.id.delete_all_templates_menu_item -> {
+                viewModel.sendAction(TransactionTemplatesListViewModel.ViewAction.DeleteAllTemplates)
+                true
+            }
+
+            else -> false
+        }
     }
 }
