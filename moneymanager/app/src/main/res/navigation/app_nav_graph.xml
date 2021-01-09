@@ -5,6 +5,14 @@
     app:startDestination="@id/transactionTemplatesListFragment">
 
     <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.elli0tt.feature_profile.presentation.ProfileFragment" />
+
+    <fragment
+        android:id="@+id/transactionTemplatesListFragment"
+        android:name="com.elli0tt.feature_transaction_template.presentation.TransactionTemplatesListFragment" />
+
+    <fragment
         android:id="@+id/transactionListFragment"
         android:name="com.elli0tt.feature_transaction_history.presentation.transaction_list.TransactionListFragment" />
 
@@ -15,8 +23,4 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.elli0tt.feature_settings.presentation.SettingsFragment" />
-
-    <fragment
-        android:id="@+id/transactionTemplatesListFragment"
-        android:name="com.elli0tt.feature_transaction_template.presentation.TransactionTemplatesListFragment" />
 </navigation>
