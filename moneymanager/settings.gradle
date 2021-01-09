@@ -1,3 +1,4 @@
+include ':feature_profile'
 include ':feature_settings'
 include ':room_database'
 include ':feature_transaction_statistics'

@@ -11,4 +11,5 @@
     <string name="transactions_menu_item">Transactions</string>
     <string name="statistics_menu_item">Statistics</string>
     <string name="settings_menu_item">Settings</string>
+    <string name="title_feature_profile">Feature Profile</string>
 </resources>
