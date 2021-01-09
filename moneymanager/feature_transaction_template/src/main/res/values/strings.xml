@@ -4,4 +4,9 @@
     <string name="delete_all_templates_menu_item_title">Delete all</string>
     <string name="add_mock_template_menu_item_title">Add mock templates</string>
     <string name="delete_all_menu_item_title">Delete all</string>
+    <string name="add_template_name_hint">Name</string>
+    <string name="add_template_price_hint">Price</string>
+    <string name="add_template_expense">Expense</string>
+    <string name="add_template_income">Income</string>
+    <string name="add_template_save">Save</string>
 </resources>

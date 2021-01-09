@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/transactionTemplatesListFragment"
-        android:name="com.elli0tt.feature_transaction_template.presentation.TransactionTemplatesListFragment" />
+        android:name="com.elli0tt.feature_transaction_template.presentation.templates_list.TransactionTemplatesListFragment" />
 
     <fragment
         android:id="@+id/transactionListFragment"

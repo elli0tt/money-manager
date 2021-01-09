@@ -1,4 +1,4 @@
-package com.elli0tt.feature_transaction_template.presentation
+package com.elli0tt.feature_transaction_template.presentation.templates_list
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.elli0tt.feature_transaction_template.R
 import com.elli0tt.feature_transaction_template.databinding.FragmentTransactionTemplatesListBinding
 import com.elli0tt.feature_transaction_template.presentation.adapter.TemplatesRecyclerAdapter
-import com.elli0tt.feature_transaction_template.presentation.di.DaggerTransactionTemplatesListComponent
+import com.elli0tt.feature_transaction_template.presentation.add_template.AddTemplateBottomSheetFragment
+import com.elli0tt.feature_transaction_template.presentation.templates_list.di.DaggerTransactionTemplatesListComponent
 import com.elli0tt.money_manager.base.extensions.injectViewModel
 import com.elli0tt.money_manager.base.extensions.viewBinding
 import com.elli0tt.money_manager.base.fragment.BaseFragment
@@ -23,6 +24,8 @@ class TransactionTemplatesListFragment :
     private val binding by viewBinding(FragmentTransactionTemplatesListBinding::bind)
 
     private val templatesRecyclerAdapter = TemplatesRecyclerAdapter()
+
+    private lateinit var addTemplateBottomSheetFragment: AddTemplateBottomSheetFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,6 +43,9 @@ class TransactionTemplatesListFragment :
 
     private fun render(viewState: TransactionTemplatesListViewModel.ViewState) {
         templatesRecyclerAdapter.submitList(viewState.templatesList)
+        if (viewState.isOpenAddTemplateBottomSheet) {
+            openAddTemplateBottomSheetFragment()
+        }
     }
 
     private fun subscribeToViewModel() {
@@ -63,6 +69,7 @@ class TransactionTemplatesListFragment :
     private fun setListeners() {
         binding.apply {
             toolbar.setOnMenuItemClickListener(toolbarMenuItemClickListener)
+            addTemplateFab.setOnClickListener(addTransactionFabOnClickListener)
         }
     }
 
@@ -79,5 +86,18 @@ class TransactionTemplatesListFragment :
 
             else -> false
         }
+    }
+
+    private val addTransactionFabOnClickListener = View.OnClickListener {
+        viewModel.sendAction(TransactionTemplatesListViewModel.ViewAction.OpenAddTransactionScreen)
+    }
+
+    private fun openAddTemplateBottomSheetFragment() {
+        addTemplateBottomSheetFragment = AddTemplateBottomSheetFragment()
+        addTemplateBottomSheetFragment.transactionListViewModel = viewModel
+        addTemplateBottomSheetFragment.show(
+            childFragmentManager,
+            AddTemplateBottomSheetFragment.TAG
+        )
     }
 }

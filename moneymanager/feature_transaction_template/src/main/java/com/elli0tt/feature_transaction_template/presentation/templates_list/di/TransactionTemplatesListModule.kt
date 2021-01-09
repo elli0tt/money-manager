@@ -1,7 +1,7 @@
-package com.elli0tt.feature_transaction_template.presentation.di
+package com.elli0tt.feature_transaction_template.presentation.templates_list.di
 
 import androidx.lifecycle.ViewModel
-import com.elli0tt.feature_transaction_template.presentation.TransactionTemplatesListViewModel
+import com.elli0tt.feature_transaction_template.presentation.templates_list.TransactionTemplatesListViewModel
 import com.elli0tt.money_manager.di.ViewModelKey
 import dagger.Binds
 import dagger.Module

@@ -1,4 +1,4 @@
-package com.elli0tt.feature_transaction_template.presentation.di
+package com.elli0tt.feature_transaction_template.presentation.templates_list.di
 
 import javax.inject.Scope
 

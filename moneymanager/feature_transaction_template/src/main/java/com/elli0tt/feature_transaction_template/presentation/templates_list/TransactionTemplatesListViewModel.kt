@@ -1,4 +1,4 @@
-package com.elli0tt.feature_transaction_template.presentation
+package com.elli0tt.feature_transaction_template.presentation.templates_list
 
 import androidx.lifecycle.viewModelScope
 import com.elli0tt.feature_transaction_template.domain.model.TemplateDomainModel
@@ -21,7 +21,8 @@ internal class TransactionTemplatesListViewModel @Inject constructor(
 
     internal data class ViewState(
         val isLoading: Boolean = false,
-        val templatesList: List<TemplateDomainModel> = emptyList()
+        val templatesList: List<TemplateDomainModel> = emptyList(),
+        val isOpenAddTemplateBottomSheet: Boolean = false
     ) : BaseViewState
 
     internal sealed class ViewAction : BaseViewAction {
@@ -33,6 +34,9 @@ internal class TransactionTemplatesListViewModel @Inject constructor(
 
         object AddMockTemplatesList : ViewAction()
         object DeleteAllTemplates : ViewAction()
+
+        object OpenAddTransactionScreen : ViewAction()
+        object CloseAddTransactionScreen : ViewAction()
     }
 
     init {
@@ -60,6 +64,9 @@ internal class TransactionTemplatesListViewModel @Inject constructor(
 
         is ViewAction.AddMockTemplatesList -> onAddMockTemplatesList()
         is ViewAction.DeleteAllTemplates -> onDeleteAllTemplates()
+
+        is ViewAction.OpenAddTransactionScreen -> state.copy(isOpenAddTemplateBottomSheet = true)
+        is ViewAction.CloseAddTransactionScreen -> state.copy(isOpenAddTemplateBottomSheet = false)
     }
 
     private fun onAddMockTemplatesList(): ViewState {
