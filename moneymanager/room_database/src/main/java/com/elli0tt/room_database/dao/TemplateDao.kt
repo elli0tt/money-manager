@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TemplateDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTemplate(templateEntity: TemplateEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

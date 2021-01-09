@@ -2,11 +2,14 @@ package com.elli0tt.feature_transaction_history.presentation.add_transaction
 
 import androidx.lifecycle.viewModelScope
 import com.elli0tt.feature_transaction_history.R
+import com.elli0tt.feature_transaction_history.domain.repository.TemplateRepository
 import com.elli0tt.feature_transaction_history.domain.repository.TransactionHistoryRepository
 import com.elli0tt.money_manager.base.view_model.BaseViewAction
 import com.elli0tt.money_manager.base.view_model.BaseViewModel
 import com.elli0tt.money_manager.base.view_model.BaseViewState
+import com.elli0tt.room_database.entities.TemplateEntity
 import com.elli0tt.room_database.entities.TransactionEntity
+import com.elli0tt.room_database.enums.TemplateRoomType
 import com.elli0tt.room_database.enums.TransactionRoomType
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -15,7 +18,8 @@ import java.util.*
 import javax.inject.Inject
 
 internal class AddTransactionBottomSheetViewModel @Inject constructor(
-    private val transactionHistoryRepository: TransactionHistoryRepository
+    private val transactionHistoryRepository: TransactionHistoryRepository,
+    private val templateRepository: TemplateRepository
 ) : BaseViewModel<AddTransactionBottomSheetViewModel.ViewState, AddTransactionBottomSheetViewModel.ViewAction>(
     ViewState()
 ) {
@@ -90,6 +94,16 @@ internal class AddTransactionBottomSheetViewModel @Inject constructor(
                     transactionType = getTransactionType(transactionTypeId)
                 )
             )
+            if (addToTemplates) {
+                templateRepository.addTemplate(
+                    TemplateEntity(
+                        name = name,
+                        price = price,
+                        templateType = getTemplateType(transactionTypeId)
+                    )
+                )
+            }
+
             Timber.d("Showing delay start")
 //            delay(5000)
             Timber.d("Showing delay end")
@@ -108,6 +122,13 @@ internal class AddTransactionBottomSheetViewModel @Inject constructor(
             R.id.expense_radio_button -> TransactionRoomType.EXPENSE
             R.id.income_radio_button -> TransactionRoomType.INCOME
             else -> throw IllegalArgumentException("No such transaction type")
+        }
+
+    private fun getTemplateType(templateTypeId: Int): TemplateRoomType =
+        when (templateTypeId) {
+            R.id.expense_radio_button -> TemplateRoomType.EXPENSE
+            R.id.income_radio_button -> TemplateRoomType.INCOME
+            else -> throw java.lang.IllegalArgumentException("No such template type")
         }
 
     private fun onPickDate(year: Int, month: Int, dayOfMonth: Int): ViewState {

@@ -1,5 +1,6 @@
 package com.elli0tt.feature_transaction_history.presentation.add_transaction.di
 
+import com.elli0tt.feature_transaction_history.di.TemplateRepositoryModule
 import com.elli0tt.feature_transaction_history.di.TransactionHistoryRepositoryModule
 import com.elli0tt.feature_transaction_history.presentation.add_transaction.AddTransactionBottomSheetFragment
 import com.elli0tt.money_manager.di.AppComponent
@@ -12,7 +13,8 @@ import dagger.Component
     modules = [
         ViewModelModule::class,
         TransactionHistoryRepositoryModule::class,
-        AddTransactionBottomSheetModule::class
+        AddTransactionBottomSheetModule::class,
+        TemplateRepositoryModule::class
     ]
 )
 interface AddTransactionBottomSheetComponent {

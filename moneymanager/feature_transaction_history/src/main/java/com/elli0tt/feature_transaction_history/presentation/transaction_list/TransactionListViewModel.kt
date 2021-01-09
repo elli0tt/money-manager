@@ -49,14 +49,17 @@ internal class TransactionListViewModel @Inject constructor(
         }
     }
 
-    override fun onReduceState(viewAction: ViewAction): ViewState = when (viewAction) {
+    override fun onReduceState(viewAction: ViewAction): ViewState =
+        when (viewAction) {
         is ViewAction.TransactionListLoading -> state.copy(isLoading = true)
         is ViewAction.TransactionListLoadingSuccess -> state.copy(
             isLoading = false,
+            isOpenAddTransactionBottomSheet = false,
             transactionList = viewAction.transactionList
         )
         is ViewAction.TransactionListLoadingFailure -> state.copy(
             isLoading = false,
+            isOpenAddTransactionBottomSheet = false,
             transactionList = emptyList()
         )
         is ViewAction.OpenAddTransactionScreen -> state.copy(isOpenAddTransactionBottomSheet = true)
